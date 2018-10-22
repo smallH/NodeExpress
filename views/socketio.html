@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>socketio测试</title>
+		<script>
+			var tmp_html = '<link rel="stylesheet" href="../js/libs/bootstrap/3.3.7/css/bootstrap.css"/>';
+			tmp_html += '<script src="../js/libs/jquery/3.2.1/jquery.js"><\/script>';
+			tmp_html += '<script src="../js/libs/bootstrap/3.3.7/bootstrap.js"><\/script>';
+			tmp_html += '<script src="../js/libs/socketio/socket.io.js"><\/script>';
+			document.write(tmp_html);
+			document.close();
+		</script>
+	</head>
+
+	<body>
+		<button id="btn">发送广播消息</button>
+	</body>
+	<script>
+		var socket = io.connect('http://127.0.0.1:8081');
+		socket.on('message', function(data) {
+			console.log(data.text);
+		});
+		socket.on('disconnect', function() {
+			alert("断开连接");
+		});
+		$("#btn").click(function() {
+			socket.emit('clientmessage', {
+				text: "hello"
+			});
+		});
+	</script>
+
+</html>

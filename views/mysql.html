@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>数据库操作测试</title>
+		<script>
+			var tmp_html = '<link rel="stylesheet" href="../js/libs/bootstrap/3.3.7/css/bootstrap.css"/>';
+			tmp_html += '<script src="../js/libs/jquery/3.2.1/jquery.js"><\/script>';
+			tmp_html += '<script src="../js/libs/bootstrap/3.3.7/bootstrap.js"><\/script>';
+			tmp_html += '<script src="../config.js"><\/script>';
+			document.write(tmp_html);
+			document.close();
+		</script>
+	</head>
+	<style>
+		button {
+			margin-left: 10px;
+			margin-top: 10px;
+		}
+	</style>
+
+	<body>
+		<button id="queryBtn" class="btn btn-primary">查询</button>
+		<br />
+		<button id="addBtn" class="btn btn-primary">增加（ID为6的记录）</button>
+		<br />
+		<button id="updateBtn" class="btn btn-primary">更新（ID为6的记录）</button>
+		<br />
+		<button id="delectBtn" class="btn btn-primary">删除（ID为6的记录）</button>
+	</body>
+
+	<script>
+		$("#queryBtn").unbind("click").bind("click", function() {
+			var requrl = config.domainPath + "/mysql_query";
+			request(requrl);
+		});
+
+		$("#addBtn").unbind("click").bind("click", function() {
+			var requrl = config.domainPath + "/mysql_add";
+			request(requrl);
+		});
+
+		$("#updateBtn").unbind("click").bind("click", function() {
+			var requrl = config.domainPath + "/mysql_update";
+			request(requrl);
+		});
+
+		$("#delectBtn").unbind("click").bind("click", function() {
+			var requrl = config.domainPath + "/mysql_delect";
+			request(requrl);
+		});
+
+		function request(requrl) {
+			$.ajax({
+				type: "POST",
+				url: requrl,
+				timeout: 30000,
+				dataType: "json",
+				error: function(response, state) {
+					console.log(response);
+				},
+				success: function(response, state) {
+					console.log(response);
+				}
+			});
+		}
+	</script>
+
+</html>

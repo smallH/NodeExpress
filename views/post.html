@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>POST请求测试</title>
+		<script>
+			var tmp_html = '<link rel="stylesheet" href="../js/libs/bootstrap/3.3.7/css/bootstrap.css"/>';
+			tmp_html += '<script src="../js/libs/jquery/3.2.1/jquery.js"><\/script>';
+			tmp_html += '<script src="../js/libs/bootstrap/3.3.7/bootstrap.js"><\/script>';
+			tmp_html += '<script src="../config.js"><\/script>';
+			document.write(tmp_html);
+			document.close();
+		</script>
+		<style>
+			.form {
+				width: 244px;
+				margin-left: 10px;
+				margin-top: 10px;
+			}
+			
+			.form .f-option {
+				height: 40px;
+			}
+			
+			.form .f-option label {
+				float: left;
+				line-height: 34px;
+			}
+			
+			.form .f-option input {
+				float: left;
+				margin-left: 10px;
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="form">
+			<div class="f-option">
+				<label for="name">姓名:</label>
+				<input id="name" type="text" class="form-control" />
+			</div>
+			<div style="clear: both; float: right;">
+				<button id="submit" class="btn btn-primary">提交</button>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		$("#submit").unbind("click").bind("click", function() {
+			var name = $("#name").val();
+			var requrl = config.domainPath + "/process_post";
+			var params = "";
+			var data = {
+				name: name
+			}
+			$.ajax({
+				url: requrl + params,
+				data: data,
+				type: "POST",
+				timeout: 30000,
+				dataType: "json",
+				error: function(response) {
+					console.log("error:", response);
+				},
+				success: function(response) {
+					console.log("success:", response);
+				}
+			});
+		});
+	</script>
+
+</html>

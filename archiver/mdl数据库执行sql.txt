@@ -1,0 +1,1 @@
+alter table t_movie add md5 varchar(32)
