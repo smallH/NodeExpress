@@ -1,7 +1,7 @@
 # NodeExpress
 nodejs服务端架构，适用于中小型服务端开发
 
-# 一.启动前需安装依赖包
+## 一.启动前需安装依赖包
 - $ cnpm install express (Web应用框架)
 - $ cnpm install body-parser (node.js 中间件，用于处理 JSON, Raw, Text 和 URL 编码的数据)
 - $ cnpm install cookie-parser (一个解析Cookie的工具，通过req.cookies可以取到传过来的cookie，并把它们转成对象)
@@ -13,5 +13,8 @@ nodejs服务端架构，适用于中小型服务端开发
 - $ cnpm install vue
 - $ cnpm install vue-server-renderer
 
-# 二.项目启动命令
+## 二.项目启动命令
 - node index.js
+
+## CSDN nodejs入门文章
+[https://blog.csdn.net/zeping891103/article/category/7423503](https://blog.csdn.net/zeping891103/article/category/7423503)
