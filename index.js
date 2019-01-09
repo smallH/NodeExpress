@@ -9,6 +9,7 @@
 //$ cnpm install socket.io(用于socket通信)
 //$ cnpm install vue
 //$ cnpm install vue-server-renderer
+//$ cnpm install formidable
 
 var fs = require("fs");
 var express = require('express');
@@ -17,6 +18,7 @@ var MySQL = require("./routes/mysql"); //用于MYSQL测试用例
 var cookieParser = require('cookie-parser'); //用于COOKIE测试用例
 var multiparty = require('multiparty'); //用于上传测试用例
 var bodyParser = require('body-parser'); //用于POST测试用例
+var formidable = require('formidable'); // 用于接收RN的fetch请求
 var urlencodedParser = bodyParser.urlencoded({
 	extended: false
 });
@@ -99,6 +101,13 @@ app.get('/process_get', function(req, res) {
 	res.end(JSON.stringify(data));
 });
 
+app.get('/rn_get', function(req, res) {
+	var data = {
+		"name": req.query.name,
+	};
+	res.end(JSON.stringify(data));
+});
+
 /********************POST测试用例********************/
 app.get('/post.html', function(req, res) {
 	res.sendFile(__dirname + "/views/post.html");
@@ -109,6 +118,17 @@ app.post('/process_post', urlencodedParser, function(req, res) {
 		"name": req.body.name,
 	};
 	res.end(JSON.stringify(data));
+});
+
+app.post('/rn_post',urlencodedParser, function(req, res) {
+	var form = new formidable.IncomingForm();
+	form.parse(req, function(err, fields, files){
+		var data = JSON.parse(fields.data);
+		var result = {
+			"name": data.name,
+		};
+		res.end(JSON.stringify(result));
+	})
 });
 
 /********************COOKIE测试用例********************/
