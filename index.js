@@ -171,7 +171,8 @@ app.get('/upload.html', function(req, res) {
 app.post('/file_upload', function(req, res) {
 	var form = new multiparty.Form();
 	form.encoding = "utf-8";
-	form.uploadDir = "./public/temp"; //此路径不会自动创建，要注意
+	//*************存储路径不会自动创建，要注意*****************
+	form.uploadDir = "./public/temp"; 
 	form.maxFilesSize = 500 * 1024 * 1024;
 	//fields：键值参数  ； files：上传文件
 	form.parse(req, function(err, fields, files) {
